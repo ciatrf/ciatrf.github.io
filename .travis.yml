@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- '0.12'
+branches:
+  only:
+  - hexo
+before_install:
+- npm install -g hexo-cli
+install:
+- npm install
+script:
+- hexo clean
+- hexo generate
+after_success:
+- git config --global user.name "ciatrf"
+- git config --global user.email "ciatrf.shen@msa.hinet.net"
+- sed -i'' "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
+- hexo deploy
+env:
+  global:
+    secure: J2f9kY/rMHNFF5UtZOSqF0MSGRwkBVAz2eKfA1Vplrvn0FDUd68y6U0NlhByLceS/kQxtC1jLoBcQxaeVPgTAnEYCPT0wd91ndDsoisGhoWFVimywEwQzFvddHdYv8zDf2oefnVYHWpjtuaKLQ7M8jI5t6YhPUE1OKAIGBTQDMT35xLOje5BRw/JWPh55JQ8yqSbp6Ja9Z/Yi44z9CSxNOEu1VRNnB2y+1u6Hpm23cI0mhw2zo7H7RoWy/cf6U1obxfxtmsNTu0Ppqwxi8dgWZMczCHK9f14SP2MKJ6QX/gsGUuOTldsJEos9gG06U1QQyXsf3sAoA9kJ1A2n0+ObERHPom3P2bZ8xLmKq+DgEvcN+JP9x15VztzuRyxpM3kWHFidc9OWqEWDF2rywLEczjJK0FqVeyRJ49iBRpcKU9b9eAdT3YjVDdnDZ498LUfFcwU4m7ZW3CgnXXvfXm4X/DST2QpyHrl9jeE17L+wJl6B+l19WlNQbfQen/eAgURCDgOmA3uCOX76ns8atMb2n1V4Oe4kTzrOvV7SQaTPZ0J+jF9vINZ88vLuSRte3XiZqdiN+PdxNcbW7Ng58Piop2H34Iz4PHu64m9TvyDPAVELVm8xF3r9UU2ScT4sHv76MnPv/dt6eQT0wTTC0qIzfBNQ2tgp1TPayxtwXAFH8I=
